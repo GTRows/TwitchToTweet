@@ -7,7 +7,10 @@ from selenium.common.exceptions import NoSuchElementException
 class Twitter:
 
     def __init__(self):
-        self.driver = webdriver.Firefox()
+        options = webdriver.FirefoxOptions()
+        options.headless = True
+
+        self.driver = webdriver.Firefox(options=options)
         self.cookie_file = "twitter_cookies.pkl"
 
     def save_cookies(self):
