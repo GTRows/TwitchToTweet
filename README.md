@@ -1,31 +1,40 @@
+
 # TwitchToTweet
 
-An automation bot that monitors changes in a Twitch stream's status, category, and title, and tweets updates in real-time using Twitter's API.
+TwitchToTweet is an automation bot that monitors changes in a Twitch stream's status, category, and title, and tweets updates in real-time.
 
-## Features
+## Getting Started
 
-- Monitors a specified Twitch stream for any status changes.
-- Sends a tweet via Twitter API when:
-  - The stream goes live.
-  - The streaming category changes.
-  - The stream title changes.
+Follow the steps below to run this project on your machine.
 
-## Requirements
-
+### Prerequisites
 - Python 3.x
-- `tweepy` library for Twitter API integration.
-- `python-twitch-client` library for Twitch API integration.
+- Selenium
+- Requests
+- Firefox Web Browser (with Geckodriver)
+- Python-decouple
 
-## Contribution
+### Installation
 
-Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](https://github.com/GTRows/TwitchToTweet/issues).
+1. Clone or download the project.
+2. Install the required Python libraries:
+   ```
+   pip install selenium requests python-decouple
+   ```
+3. Modify the `channels.json` file to add the Twitch channels you want to monitor.
+4. Add your `CLIENT_ID` and `AUTH_BEARER` for the Twitch API to the `.env` file.
+5. On the first run, you will need to manually log in to your Twitter account. This is to save the cookies.
+
+### Usage
+
+- Run the `main.py` file to start the bot. It will begin monitoring Twitch streams and will automatically tweet any changes detected.
+- You can manually test the Twitter automation functions by running the `Twitter.py` file.
+
+## Contributing
+
+This project is open source and contributions are welcome! Feel free to submit pull requests to add new features, fix bugs, or improve documentation.
 
 ## License
 
-MIT License. See `LICENSE` for more information.
+This project is licensed under the MIT License. For more details, see the [LICENSE](LICENSE) file.
 
-## Acknowledgements
-
-- Twitch API Documentation
-- Tweepy Documentation
-- Everyone who contributed to this project!
