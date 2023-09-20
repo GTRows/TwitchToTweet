@@ -1,0 +1,26 @@
+{
+    "channels": [
+        {
+            "name": "channel_1",
+            "isLive": false,
+            "lastTitle": "",
+            "lastCategory": "",
+            "notify": {
+                "live": true,
+                "titleChange": true,
+                "categoryChange": true
+            }
+        },
+        {
+            "name": "channel_2",
+            "isLive": false,
+            "lastTitle": "",
+            "lastCategory": "",
+            "notify": {
+                "live": false,
+                "titleChange": false,
+                "categoryChange": true
+            }
+        }
+    ]
+}
