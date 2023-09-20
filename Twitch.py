@@ -19,8 +19,13 @@ class Twitch:
         }
         response = requests.get(url, headers=headers)
         data = response.json()
-        if len(data['data']) > 0:
-            return data['data'][0]
+
+        try:
+            if len(data['data']) > 0:
+                return data['data'][0]
+        except KeyError:
+            print(f"Unexpected response structure from API for channel: {channel_name}. Response: {data}")
+            return None
         return None
 
     def check_channels(self):
