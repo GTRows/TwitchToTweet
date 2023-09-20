@@ -1,5 +1,5 @@
-import Twitch
-import Twitter
+from Twitter import Twitter
+from Twitch import Twitch
 import time
 
 
