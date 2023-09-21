@@ -1,17 +1,23 @@
+from selenium.common.exceptions import NoSuchElementException
 from selenium import webdriver
 import pickle
 import time
-from selenium.common.exceptions import NoSuchElementException
+import os
 
 
 class Twitter:
 
     def __init__(self):
+        self.cookie_file = "twitter_cookies.pkl"
+        headless_mode = self.check_existing_cookies()
+
         options = webdriver.FirefoxOptions()
-        options.headless = True
+        options.headless = headless_mode
 
         self.driver = webdriver.Firefox(options=options)
-        self.cookie_file = "twitter_cookies.pkl"
+
+    def check_existing_cookies(self):
+        return os.path.exists(self.cookie_file) and os.path.getsize(self.cookie_file) > 0
 
     def save_cookies(self):
         cookies = self.driver.get_cookies()
@@ -46,7 +52,7 @@ class Twitter:
         time.sleep(4)
         print("Tweet sent!")
 
-    def find_element_with_wait(self, method, value, timeout=10):
+    def find_element_with_wait(self, method, value, timeout=25):
         for _ in range(timeout):
             try:
                 return self.driver.find_element(method, value)
