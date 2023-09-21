@@ -1,11 +1,15 @@
+from decouple import config
+from Logger import Logger
 import requests
 import json
-from decouple import config
 
 
 class Twitch:
 
     def __init__(self):
+        self.logger = Logger(__name__).get_logger()
+        self.logger.info("Initializing Twitch class...")
+
         self.CLIENT_ID = config('CLIENT_ID')
         self.AUTH_BEARER = config('AUTH_BEARER')
         with open("channels.json", "r") as file:
@@ -24,7 +28,7 @@ class Twitch:
             if len(data['data']) > 0:
                 return data['data'][0]
         except KeyError:
-            print(f"Unexpected response structure from API for channel: {channel_name}. Response: {data}")
+            self.logger.error(f"Unexpected response structure from API for channel: {channel_name}. Response: {data}")
             return None
         return None
 
@@ -54,6 +58,7 @@ class Twitch:
         # Save the updated data back to the JSON file
         with open("channels.json", "w") as file:
             json.dump(self.data, file, indent=4)
+        self.logger.info(f"Saved updated data to channels.json {self.data}")
 
         return messages_to_tweet
 

@@ -2,14 +2,12 @@ from Twitter import Twitter
 from Twitch import Twitch
 from Logger import Logger
 import time
-import datetime
 
 log = Logger(__name__).get_logger()
 
 
 def main():
     check_interval = 60
-    print("Starting...")
     log.info("Starting...")
     twitter = Twitter()
     twitch = Twitch()

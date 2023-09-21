@@ -1,5 +1,6 @@
 from selenium.common.exceptions import NoSuchElementException
 from selenium import webdriver
+from Logger import Logger
 import pickle
 import time
 import os
@@ -8,6 +9,9 @@ import os
 class Twitter:
 
     def __init__(self):
+        self.logger = Logger(__name__).get_logger()  # Logger örneğini oluştur
+        self.logger.info("Initializing Twitter class...")
+
         self.cookie_file = "twitter_cookies.pkl"
         headless_mode = self.check_existing_cookies()
 
@@ -34,6 +38,7 @@ class Twitter:
         self.driver.get("https://twitter.com/login")
         input("Giriş yaptıktan sonra enter tuşuna basınız...")
         self.save_cookies()
+        self.logger.info("Cookies saved after login.")
 
     def send_tweet(self, message):
         self.driver.get("https://twitter.com")
@@ -49,8 +54,7 @@ class Twitter:
         send_tweet_button = self.find_element_with_wait("xpath", "//div[@data-testid='tweetButton']")
         send_tweet_button.click()
 
-        time.sleep(4)
-        print("Tweet sent!")
+        self.logger.info("Tweet successfully sent!")
 
     def find_element_with_wait(self, method, value, timeout=25):
         for _ in range(timeout):
@@ -58,6 +62,7 @@ class Twitter:
                 return self.driver.find_element(method, value)
             except NoSuchElementException:
                 time.sleep(1)
+        self.logger.error(f"Element ({method}, {value}) couldn't be found after {timeout} seconds!")
         raise NoSuchElementException(f"Element ({method}, {value}) couldn't be found after {timeout} seconds!")
 
     def close(self):

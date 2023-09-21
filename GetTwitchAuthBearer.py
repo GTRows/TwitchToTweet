@@ -1,8 +1,5 @@
 import requests
 
-CLIENT_ID = "YOUR_CLIENT_ID"
-CLIENT_SECRET = "YOUR_CLIENT_SECRET"
-
 
 def get_twitch_auth_bearer(client_id, client_secret):
     url = "https://id.twitch.tv/oauth2/token"
@@ -16,5 +13,14 @@ def get_twitch_auth_bearer(client_id, client_secret):
     return data.get("access_token", None)
 
 
-auth_bearer = get_twitch_auth_bearer(CLIENT_ID, CLIENT_SECRET)
-print(auth_bearer)
+if __name__ == "__main__":
+    CLIENT_ID = "YOUR_CLIENT_ID"
+    CLIENT_SECRET = "YOUR_CLIENT_SECRET"
+
+    # If you don't want to hardcode your client ID and secret, you can enter them here
+    if CLIENT_ID == "YOUR_CLIENT_ID":
+        CLIENT_ID = input("Enter your client ID: ")
+        CLIENT_SECRET = input("Enter your client secret: ")
+
+    auth_bearer = get_twitch_auth_bearer(CLIENT_ID, CLIENT_SECRET)
+    print(f"Your auth bearer is: {auth_bearer}")
